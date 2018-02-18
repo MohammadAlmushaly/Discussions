@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+
+    <p>
+      <strong>Title:</strong>
+      <%= @discussion.title %>
+    </p>
+  </div>
+
+  <div class="panel-body"> 
+
+    <p>
+      <strong>Body:</strong>
+      <%= @discussion.body %>
+    </p>
+
+    <p>
+      <strong>By:</strong>
+      <%= @discussion.account.email %>
+    </p>
+
+    <div class="panel panel-default">
+      <div class="panel-body"> 
+        <table class="table">
+          <thead>
+            <tr>
+             <th> visitors comments</th>
+           </tr>
+         </thead>
+         <tbody>
+          <% @discussion.comments.each do |comment| %>
+          <tr>
+            <td>
+
+              <%= comment.body %>
+
+            </td>
+            <td><%# comment.user.email %></td>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">add comment</div>
+  <div class="panel-body"> 
+
+    <%= form_for([@discussion,@discussion.comments.build]) do |f| %>
+
+    <div class="field">
+      <%= f.text_area :body ,:class => 'form-control' %>
+    </div>
+    <div class="field">
+      <%= f.submit  class:"btn btn-success" %>
+    </div>
+
+    <% end %>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_discussion_path(@discussion),:class=>"btn btn-info" if  session[:account]==@discussion.account.id %>
+<%= link_to 'Back', discussions_path,:class=>"btn btn-info" %>
+
+

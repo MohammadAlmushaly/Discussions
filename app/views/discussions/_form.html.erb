@@ -1,0 +1,27 @@
+<%= form_with(model: discussion, local: true) do |form| %>
+  <% if discussion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(discussion.errors.count, "error") %> prohibited this discussion from being saved:</h2>
+
+      <ul>
+      <% discussion.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :discussion_title,  :class => "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body, id: :discussion_body, :size => "18x22", :class => "form-control"  %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-lg btn-primary btn-block"%>
+  </div>
+<% end %>
